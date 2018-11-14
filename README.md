@@ -1,5 +1,10 @@
 # Python
 
+## 安装模块
+```
+pip install 
+```
+
 ## 基础数据类型
 [代码](https://github.com/xxg3053/learn-python/blob/master/lang/base.go)
 - Number 数字（整数、小数）  
