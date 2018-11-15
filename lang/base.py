@@ -19,9 +19,15 @@ def group():
     print(g * 3)
 
 
-
+def vars():
+    a = [1, 2, 3]
+    b = [1, 2]
+    print(a + b)
+    c = a or b and a
+    print(c)
 
 
 if __name__ == '__main__':
     number()
     group()
+    vars()
