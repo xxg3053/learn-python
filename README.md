@@ -56,6 +56,29 @@ from namespace.module_name import val1，val2
 
 
 ## Python函数
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.go)
+
+- 功能性
+- 隐藏细节
+- 避免编写重复代码
+```
+round(1.2435, 3) #保留三位小数
+
+def funcname(parameter_list)
+    pass
+# 1 参数列表可以没有
+# 2 return value / None
+```
+- 没有限制返回类型
+- return 之后代码不执行
+- 可返回多个值，用,连接
+- 多个值返回结果，用单个变量获取返回类型为元组
+- 多个返回结果，可以使用过个值接收，序列解包
+
+###### 函数参数
+- 必须参数
+- 关键字参数
+- 默认参数
 
 ## 面向对象
 
