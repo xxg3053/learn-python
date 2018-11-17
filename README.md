@@ -16,7 +16,7 @@ pip install
 ```
 [1, 2, -1, 4, 'a', True]
 ```
-
+dict list str int float True False None  
 
 ## 变量与运算
 - 使用=赋值
@@ -76,18 +76,36 @@ def funcname(parameter_list)
 - 多个返回结果，可以使用过个值接收，序列解包
 
 ###### 函数参数
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.go)
 - 必须参数
 - 关键字参数
 - 默认参数
 
 ## 面向对象
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/oop.go)
+
+- 有意义的面向对象的代码
 
 ## 正则、JSON
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/regex.go)
+
+- 特殊的字符序列
 
 ## 高级语法
 
 ## 函数式编程
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.go)
+
+- 闭包
 
 ## 爬虫
+[代码](https://github.com/xxg3053/learn-python/blob/master/crawler/spider.go)
+
 
 ## Pythonic
+
+#### 日志分析
+
+#### excel读写
+
+#### 数据分析

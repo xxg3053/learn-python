@@ -36,3 +36,19 @@ def swap1(x=3, y=6):
 print(swap(y=1, x=2))
 
 
+"""
+函数式编程
+"""
+
+# 闭包 = 函数 + 环境变量
+def curve_pre():
+    a = 10
+    def curev(x):
+        return a * x
+    return curev
+
+a = 11 # a不受影响
+f = curve_pre()
+print(f(1))
+
+# 匿名函数 lambda
