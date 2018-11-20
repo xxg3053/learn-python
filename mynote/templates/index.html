@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>个人笔记</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/element-ui.2.4.10.css">
+    <link rel="stylesheet" href="/static/css/github.css">
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/element-ui.2.4.10.js"></script>
+    <script src="/static/js/axios.min.js"></script>
+    <style>
+        body{
+            background: #000000;
+            font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+
+        }
+        .main-content{
+            background: #2B2B2B;
+        }
+        .main-content .el-menu{
+            border-right: solid 1px #2B2B2B;
+        }
+        .main-head{
+            background: #000000;
+            font-size: 1.5em;
+            color: #FFFFFF;
+        }
+        .main-head i{
+            margin-top: 0.6em;
+            margin-right: 0.6em;
+        }
+        .left-bar{
+            background-color: #252525;
+        }
+        .content{
+            color: #FFFFFF;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container style="height: 600px;">
+        <el-header class="main-head">
+            <i title="delete" class="el-icon-delete" v-on:click="deleteClick" ></i>
+            <i title="add" class="el-icon-circle-plus-outline" @click="addFormVisible = true" v-if="addFormVisible == false"></i>
+            <i title="save or update" class="el-icon-circle-check-outline" @click="save"></i>
+            <i title="edit" class="el-icon-edit" v-on:click="editClick" v-if="status == 0"></i>
+            <i title="markdown" class="el-icon-view" v-on:click="viewClick" v-if="status == 1"></i>
+        </el-header>
+        <el-container class="main-content">
+            <el-aside class="left-bar" >
+                <el-menu :default-active="0"
+                         background-color="#252525"
+                         text-color="#fff"
+                         active-text-color="#da0f0f"
+                         @select="handleSelect">
+                    <el-menu-item v-for="(note, index) in notes" :index="index">
+                        {{ note.title }}
+                    </el-menu-item>
+                </el-menu>
+            </el-aside>
+            <el-main class="content">
+                <div v-if="status == 0" v-html="markdowntext">
+
+                </div>
+                <el-container v-if="status == 1">
+                    <el-header style="height:10px;padding: -2px 10px;">
+                        <i class="el-icon-edit"></i>
+                    </el-header>
+                    <el-main>
+                        <el-input type="textarea"
+                                  :autosize="{ minRows: 28}"
+                                  placeholder=""
+                                  v-model="curNote.content"
+                                  clearable>
+                        </el-input>
+                    </el-main>
+                </el-container>
+            </el-main>
+        </el-container>
+
+        <el-dialog title="Add Note" :visible.sync="addFormVisible">
+            <el-form :model="addForm" :rules="rules"  ref="form">
+                <el-form-item label="Note Title" prop="title">
+                    <el-input v-model="addForm.title" autocomplete="off" clearable autofocus required="true"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="addFormVisible = false">Cancle</el-button>
+                <el-button type="primary" @click="addNote('form')">Confirm</el-button>
+            </div>
+        </el-dialog>
+
+    </el-container>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            notes: [],
+            curNote:{id:'', title:'', content:'Please input sth'},
+            status: 0,
+            addFormVisible: false,
+            addForm:{id:'', title:'', content:''},
+            markdowntext:'',
+            rules:{
+                title :[{required: true, message: 'Please input note title', trigger: 'blur'}],
+            },
+        },
+        methods: {
+            getNotes(){
+                var thiz = this
+                axios.get('/api/articles')
+                    .then(function (resp) {
+                        if (resp.data && resp.data.code == 200) {
+                            console.log(resp.data.data)
+                            thiz.notes = resp.data.data
+                            if(thiz.notes[0]){
+                                thiz.curNote = thiz.notes[0]
+                                thiz.markdown()
+                            }
+                        } else {
+                            thiz.$message({message: 'Request note error', center: true, type: 'error'});
+                        }
+                    })
+            },
+            handleSelect(key, keyPath) {
+                this.curNote = this.notes[key]
+                this.markdown()
+
+            },
+            addNote(formData){
+                this.$refs[formData].validate((valid) => {
+                    if (valid) {
+                        this.addFormVisible = false
+                        this.notes.push(this.addForm)
+                        this.curNote = this.addForm
+                        this.status = 1
+                        this.addForm = {id:'', title:'', content:''}
+                    }
+                });
+
+            },
+            editClick(event) {
+                this.$message({message: 'Switch to edit mode', center: true, type: 'success'});
+                this.status = 1
+            },
+            viewClick (event) {
+                this.$message({message: 'Switch to view mode', center: true, type: 'success'});
+                this.status = 0
+                this.markdown()
+            },
+            deleteClick(event) {
+                var thiz = this
+                this.$alert('Do you want to delete it ？', 'Warning', {
+                    confirmButtonText: 'Confirm',
+                    callback: function () {
+                        axios.delete('/api/articles/' + thiz.curNote.id)
+                            .then(function (resp) {
+                                if(resp.data.code == 200){
+                                    thiz.$message({message: 'Delete Success', center: true, type: 'success'});
+                                    thiz.getNotes()
+                                }else {
+                                    thiz.$message({message: resp.data.data, center: true, type: 'error'});
+                                }
+                            })
+                    }
+                });
+            },
+            save(event){
+                if(this.curNote.content == ''){
+                    this.$message({message: 'Please input note content', center: true, type: 'warning'});
+                    return
+                }
+                var thiz = this
+                axios.post('/api/articles',thiz.curNote)
+                    .then(function (resp) {
+                        if(resp.data.code == 200){
+                            thiz.$message({message: 'Save Success', center: true, type: 'success'});
+
+                        }else {
+                            thiz.$message({message: resp.data.data, center: true, type: 'error'});
+                        }
+                    })
+            },
+            markdown(id){
+                var thiz = this
+                axios.get('/api/articles/markdown/' + thiz.curNote.id)
+                    .then(function (resp) {
+                        if(resp.data.code == 200){
+                            thiz.markdowntext = resp.data.data.html
+                        }
+                    })
+            }
+        },
+        created() {
+            this.getNotes()
+        }
+    })
+</script>
+</html>
