@@ -106,6 +106,10 @@ def funcname(parameter_list)
 
 #### 日志分析
 
+#### 文件读写
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/file.go)
+
+
 #### excel读写
 
 #### 数据分析

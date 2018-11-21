@@ -26,8 +26,25 @@ def vars():
     c = a or b and a
     print(c)
 
+def base():
+    yz = (1, 2, 3) # 元祖
+    print(yz)
+    print(list('Python')) # ['P', 'y', 't', 'h', 'o', 'n']
+    dic = {'a':1, 'b':2} # dict
+    print(dic)
+
+def list_op():
+    lt = []
+    lt.append(1)
+    lt.append(2)
+    lt.append('a')
+    print(lt)
+
+
 
 if __name__ == '__main__':
     number()
     group()
     vars()
+    base()
+    list_op()
