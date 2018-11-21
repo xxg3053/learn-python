@@ -6,7 +6,7 @@ pip install
 ```
 
 ## 基础数据类型
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/base.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/base.py)
 - Number 数字（整数、小数）  
 - int 整数  
 - float 浮点数   
@@ -24,7 +24,7 @@ dict list str int float True False None
 - 变量名首字符不能是数字
 
 ## 分支、循环、条件与枚举
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/branch.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/branch.py)
 
 
 ## 包、模块、函数与变量作用域
@@ -56,7 +56,7 @@ from namespace.module_name import val1，val2
 
 
 ## Python函数
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.py)
 
 - 功能性
 - 隐藏细节
@@ -76,30 +76,30 @@ def funcname(parameter_list)
 - 多个返回结果，可以使用过个值接收，序列解包
 
 ###### 函数参数
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.py)
 - 必须参数
 - 关键字参数
 - 默认参数
 
 ## 面向对象
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/oop.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/oop.py)
 
 - 有意义的面向对象的代码
 
 ## 正则、JSON
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/regex.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/regex.py)
 
 - 特殊的字符序列
 
 ## 高级语法
 
 ## 函数式编程
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.py)
 
 - 闭包
 
 ## 爬虫
-[代码](https://github.com/xxg3053/learn-python/blob/master/crawler/spider.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/crawler/spider.py)
 
 
 ## Pythonic
@@ -107,9 +107,10 @@ def funcname(parameter_list)
 #### 日志分析
 
 #### 文件读写
-[代码](https://github.com/xxg3053/learn-python/blob/master/lang/file.go)
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/file.py)
 
 
 #### excel读写
+[代码](https://github.com/xxg3053/learn-python/blob/master/excel/excel.py)
 
 #### 数据分析
