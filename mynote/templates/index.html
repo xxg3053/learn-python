@@ -10,30 +10,18 @@
     <script src="/static/js/axios.min.js"></script>
     <style>
         body{
-            background: #000000;
             font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 
         }
-        .main-content{
-            background: #2B2B2B;
-        }
-        .main-content .el-menu{
-            border-right: solid 1px #2B2B2B;
-        }
         .main-head{
-            background: #000000;
             font-size: 1.5em;
-            color: #FFFFFF;
         }
         .main-head i{
             margin-top: 0.6em;
             margin-right: 0.6em;
         }
-        .left-bar{
-            background-color: #252525;
-        }
-        .content{
-            color: #FFFFFF;
+        .el-tag{
+            margin-top: 15px;
         }
 
     </style>
@@ -51,32 +39,36 @@
         <el-container class="main-content">
             <el-aside class="left-bar" >
                 <el-menu :default-active="0"
-                         background-color="#252525"
-                         text-color="#fff"
+                         height="200px"
                          active-text-color="#da0f0f"
                          @select="handleSelect">
                     <el-menu-item v-for="(note, index) in notes" :index="index">
                         {{ note.title }}
                     </el-menu-item>
                 </el-menu>
+                <el-footer>
+                    <el-tag>**粗**</el-tag>
+                    <el-tag type="success">*倾斜*</el-tag>
+                    <el-tag type="info">~~中划线~~</el-tag>
+                    <el-tag type="warning">++下划线++</el-tag>
+                    <el-tag type="danger">==背景色==</el-tag>
+
+                    <el-tag type="success">[link](http://www.baidu.com)</el-tag>
+                    <el-tag type="info">![image](http://xx/favicon.ico)</el-tag>
+                </el-footer>
             </el-aside>
             <el-main class="content">
                 <div v-if="status == 0" v-html="markdowntext">
 
                 </div>
-                <el-container v-if="status == 1">
-                    <el-header style="height:10px;padding: -2px 10px;">
-                        <i class="el-icon-edit"></i>
-                    </el-header>
-                    <el-main>
-                        <el-input type="textarea"
-                                  :autosize="{ minRows: 28}"
-                                  placeholder=""
-                                  v-model="curNote.content"
-                                  clearable>
-                        </el-input>
-                    </el-main>
-                </el-container>
+                <el-main v-if="status == 1">
+                    <el-input type="textarea"
+                              :autosize="{ minRows: 28}"
+                              placeholder=""
+                              v-model="curNote.content"
+                              clearable>
+                    </el-input>
+                </el-main>
             </el-main>
         </el-container>
 

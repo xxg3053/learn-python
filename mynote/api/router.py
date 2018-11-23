@@ -44,9 +44,12 @@ def deleteArticles(id):
 def getMkrticles(id):
     note = mode.get_note(id)
     content = note[2]
-    html = markdown.markdown(content,extensions=['markdown.extensions.extra',
-                                                 'markdown.extensions.codehilite',
-                                                 'markdown.extensions.tables'])
+    html = markdown.markdown(content,
+             extensions=['markdown.extensions.extra',
+                         'markdown.extensions.codehilite',
+                         'markdown.extensions.tables'])
+
+
     return success({'html':html})
 
 

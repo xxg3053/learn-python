@@ -114,3 +114,25 @@ def funcname(parameter_list)
 [代码](https://github.com/xxg3053/learn-python/blob/master/excel/excel.py)
 
 #### 数据分析
+
+#### pypi
+1. 注册pypi账号 https://pypi.org/user/Kenfo/   
+2. 编写setup.py文件
+3. 执行如下命令    
+```
+# 检查setup.py文件
+python setup.py check
+# 打包上传
+python setup.py register sdist upload
+```
+4. 安装上传的包   
+由于本地默认配置的douban的源，因此安装自己的包：
+```
+pip install -i https://pypi.org/simple/  kenfotools
+
+# 查看已安装包版本信息
+pip freeze
+# 卸载
+pip uninstall
+```
+ 
