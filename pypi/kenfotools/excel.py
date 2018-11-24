@@ -1,6 +1,13 @@
 import os
 import xlrd
+import xlwt
 
+"""
+excel to list 
+
+like that:
+[{'field1':1,'field2':2},{'field1':2,'field2':3}]
+"""
 def tolist(filename):
     result = []
     if os.path.exists(filename):
@@ -26,6 +33,9 @@ def read_field(filename):
         return field
 
 
+"""
+read excel by line
+"""
 def read_line(filename, func):
     if os.path.exists(filename):
         wb = xlrd.open_workbook(filename)
@@ -38,3 +48,32 @@ def read_line(filename, func):
             for i in range(clo_num):
                 obj[field[i]] = data[i]
                 func(data)
+
+
+"""
+Writer list to Excel
+
+data like that:
+data=[{'field1':1,'field2':2},{'field1':2,'field2':3}]
+"""
+def write(excel_name='data.xls', sheet_name='sheet1', data=[]):
+    if len(data) == 0:
+        print('Please input data')
+        return
+    wb = xlwt.Workbook(encoding='utf-8')
+    my_sheet = wb.add_sheet(sheet_name)
+    style = xlwt.XFStyle()
+    font = xlwt.Font()
+    # font.bold = True
+    # font.underline = True
+    # font.italic = True
+    style.font = font  # 设定样式
+    data1 = data[0]
+    fields = list(data1.keys())
+    for i in range(len(fields)):
+        my_sheet.write(0, i, fields[i])
+    for i in range(len(data)):
+        for j in range(len(fields)):
+            my_sheet.write(i + 1, j, data[i][fields[j]])
+
+    wb.save( excel_name)

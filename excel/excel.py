@@ -1,5 +1,6 @@
 #打开excel
 import xlrd
+import xlwt
 
 def excel_base():
     wb=xlrd.open_workbook('test.xlsx')
@@ -36,3 +37,31 @@ def excel_list():
 
 
 #excel_list()
+
+def excel_write(excel_name='data.xls', sheet_name='sheet1', data=[]):
+    if len(data) == 0:
+        print('Please input data')
+        return
+    wb = xlwt.Workbook(encoding='utf-8')  # 设置编码格式
+    my_sheet = wb.add_sheet(sheet_name)
+    """向excel写入内容，内容自定义"""
+    style = xlwt.XFStyle()  # 初始化样式
+    font = xlwt.Font()  # 为样式创建字体
+    font.name = 'Times New Roman'
+    # font.bold = True                                  # 黑体
+    # font.underline = True                             # 下划线
+    # font.italic = True                                # 斜体字
+    style.font = font  # 设定样式
+    data1 = data[0]
+    fields = list(data1.keys())
+    for i in range(len(fields)):
+        my_sheet.write(0, i, fields[i])# 参数对应 行, 列, 值
+    for i in range(len(data)):
+        for j in range(len(fields)):
+            my_sheet.write(i + 1, j, data[i][fields[j]])
+
+    wb.save( excel_name)
+
+
+excel_write(data=[{'field1':1,'field2':2},{'field1':2,'field2':3}])
+
