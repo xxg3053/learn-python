@@ -92,6 +92,12 @@ def funcname(parameter_list)
 - 特殊的字符序列
 
 ## 高级语法
+[代码](https://github.com/xxg3053/learn-python/blob/master/lang/high.py)
+- map
+- reduce
+- filter
+- 装饰器
+
 
 ## 函数式编程
 [代码](https://github.com/xxg3053/learn-python/blob/master/lang/func.py)
