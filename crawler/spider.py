@@ -2,6 +2,11 @@ import ssl
 from urllib import request
 import re
 
+import os
+import requests
+from contextlib import closing
+
+
 class Spider():
     root_url = ""
     # ? 非贪婪模式
@@ -20,6 +25,14 @@ class Spider():
         r = request.urlopen(req, context=context)
         html = r.read()
         return str(html, encoding='utf-8')
+
+    def __fetch_image(self, url):
+        filename = os.path.basename(url)
+        headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
+        with closing(requests.get(url, headers=headers, stream=True)) as resp:
+            with open(filename, 'wb') as fd:
+                for chunk in resp.iter_content(128):
+                    fd.write(chunk)
 
 
     def __analysis(self, html):
@@ -43,7 +56,10 @@ class Spider():
             image_urls = self.__analysis(html)
             # self.__refine(image_urls)
 
+    def download_image(self, url):
+        self.__fetch_image(url=url)
 
 
 splider = Spider()
-splider.run()
+# splider.run()
+splider.download_image('https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png')
