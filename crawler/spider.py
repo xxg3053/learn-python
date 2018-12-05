@@ -20,7 +20,7 @@ class Spider():
         # 防止403
         headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
         # http base auth 'Authorization': Basic asdfiasef
-
+        # 没有使用requests库
         req = request.Request(url=url, headers=headers)
         r = request.urlopen(req, context=context)
         html = r.read()

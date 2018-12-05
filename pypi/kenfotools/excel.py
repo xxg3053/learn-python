@@ -47,7 +47,7 @@ def read_line(filename, func):
             data = sheet.row_values(row)
             for i in range(clo_num):
                 obj[field[i]] = data[i]
-                func(data)
+            func(obj)
 
 
 """

@@ -106,7 +106,9 @@ def funcname(parameter_list)
 
 ## 爬虫
 [代码](https://github.com/xxg3053/learn-python/blob/master/crawler/spider.py)
-
+- 爬取html信息
+- 正则分析需要的数据
+- 下载图片
 
 ## Pythonic
 
@@ -120,6 +122,7 @@ def funcname(parameter_list)
 [代码](https://github.com/xxg3053/learn-python/blob/master/excel/excel.py)
 
 #### 数据分析
+[说明](https://github.com/xxg3053/learn-python/blob/master/DA/README.md)
 
 #### pypi
 1. 注册pypi账号 https://pypi.org/user/Kenfo/   
